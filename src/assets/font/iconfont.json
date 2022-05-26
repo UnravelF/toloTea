@@ -1,0 +1,23 @@
+{
+  "id": "3390710",
+  "name": "myproject",
+  "font_family": "iconfont",
+  "css_prefix_text": "icon-search",
+  "description": "vue",
+  "glyphs": [
+    {
+      "icon_id": "577402",
+      "name": "向右1",
+      "font_class": "xiangyou1",
+      "unicode": "e775",
+      "unicode_decimal": 59253
+    },
+    {
+      "icon_id": "5387553",
+      "name": "搜索",
+      "font_class": "sousuo",
+      "unicode": "eafe",
+      "unicode_decimal": 60158
+    }
+  ]
+}
