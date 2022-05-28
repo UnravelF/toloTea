@@ -8,6 +8,8 @@
       <home-login/>
       <!-- 立即点餐模块 -->
       <home-order/>
+      <!-- 底部活动模块 -->
+      <home-footer/>
     </scroll>
   </div>
 </template>
@@ -18,6 +20,7 @@
   import HomeSwiper from './childComp/HomeSwiper'
   import HomeLogin from './childComp/HomeLogin'
   import HomeOrder from './childComp/HomeOrder'
+  import HomeFooter from './childComp/HomeFooter'
 
 
 
@@ -27,13 +30,23 @@
       Scroll,
       HomeSwiper,
       HomeLogin,
-      HomeOrder
+      HomeOrder,
+      HomeFooter
     }
   }
 </script>
 
 <style scoped>
   #home {
+    position: relative;
+    height: 100vh;
     background-color: #f9f5f5;
+  }
+
+  .content {
+    position: absolute;
+    bottom: 49px;
+    left: 0;
+    right: 0;
   }
 </style>

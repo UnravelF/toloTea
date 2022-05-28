@@ -1,6 +1,6 @@
 <template>
   <div ref="wrapper" class="wrapper">
-    <div class="content">
+    <div>
       <slot></slot>
     </div>
   </div>
