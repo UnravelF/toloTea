@@ -15,18 +15,21 @@
 <style scoped>
   .nav-bar {
     display: flex;
-    height: 58px;
-    line-height: 58px;
+    height: 49px;
+    line-height: 49px;
     text-align: center;
-    box-shadow: 0 1px 1px rgba(100, 100, 100, .1);
+    box-shadow: 0px 3px 3px #eee;
   }
 
-  .left, .right {
-    width: 60px;
+  .left {
+    width: 80px;
   }
-  
+
+  .right {
+    width: 80px;
+  }
+
   .center {
     flex: 1;
   }
-
 </style>

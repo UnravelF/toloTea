@@ -45,6 +45,7 @@
 
   .content {
     position: absolute;
+    top: 0;
     bottom: 49px;
     left: 0;
     right: 0;

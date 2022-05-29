@@ -9,6 +9,13 @@ const Profile = () => import('../views/profile/Profile')
 // 安装插件
 Vue.use(VueRouter)
 
+const originalPush = VueRouter.prototype.push
+// 修改 原型对象中的push方法
+VueRouter.prototype.push = function push(location) {
+  return originalPush.call(this, location).catch(err=>err)
+}
+
+
 const routes = [
   {
     path: '/',

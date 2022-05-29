@@ -1,11 +1,19 @@
 <template>
-  <h2>点餐</h2>
+  <div id="menu">
+    <!-- 点餐顶部导航栏 -->
+    <menu-nav-bar/>
+  </div>
 </template>
 
 <script>
-export default {
-  name: "Menu"
-}
+  import MenuNavBar from './childComp/MenuNavBar'
+
+  export default {
+    name: "Menu",
+    components: {
+      MenuNavBar
+    }
+  }
 </script>
 
 <style scoped>
