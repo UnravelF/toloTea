@@ -21,7 +21,10 @@
     },
     methods: {
       itemClick() {
-        this.$router.replace(this.path)
+        // 解决连续点击统一路径错误提示
+        if(!this.$route.path.includes(this.path)) {
+          this.$router.replace(this.path)
+        }
       }
     },
     computed: {
