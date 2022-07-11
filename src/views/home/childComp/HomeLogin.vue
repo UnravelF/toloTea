@@ -87,7 +87,7 @@
     height: 20px;
     padding: 5px;
     border-radius: 5px;
-    background-color: #dd2727;
+    background-color: #f97070;
     color: #fff;
     font-size: 14px;
   }  

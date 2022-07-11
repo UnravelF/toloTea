@@ -34,6 +34,6 @@
     font-weight: 700;
     color: #fff;
     border-radius: 5px;
-    background-color: #d81e06;
+    background-color: #f97070;
   }
 </style>

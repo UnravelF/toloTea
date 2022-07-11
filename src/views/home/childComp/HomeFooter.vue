@@ -23,7 +23,7 @@ export default {
 <style scoped>
   .home-footer {
     /* position: relative; */
-    margin: 20px 20px;
+    margin: 30px 20px;
   }
 
   .footer-container {

@@ -18,7 +18,6 @@
     height: 49px;
     line-height: 49px;
     text-align: center;
-    box-shadow: 0px 3px 3px #eee;
   }
 
   .left {
