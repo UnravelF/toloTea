@@ -11,13 +11,18 @@
               @scroll="contentScroll">
         <div>
           <!-- 内容区banner图模块 -->
-          <menu-banner/>
+          <menu-swiper/>
           <!-- item列表 -->
           <menu-item ref="item" @addCart="addCart"/>
         </div>
       </scroll>
+      <!-- 添加购物车弹框 -->
       <template v-if="showAddCart">
         <add-cart @cancelClick="cancelClick" @addClick="addClick"/>
+      </template>
+      <!-- 购物车模块 -->
+      <template v-if="showCart">
+        <shop-cart/>
       </template>
     </div>
   </div>
@@ -26,10 +31,10 @@
 <script>
   import MenuNavBar from './childComp/MenuNavBar'
   import MenuTab from './childComp/MenuTab'
-  import MenuBanner from './childComp/MenuBanner'
+  import MenuSwiper from './childComp/MenuSwiper'
   import MenuItem from './childComp/MenuItem'
-
-  import AddCart from './childComp/addCart'
+  import AddCart from './childComp/AddCart'
+  import ShopCart from './childComp/ShopCart'
 
   import Scroll from 'components/common/scroll/Scroll'
 
@@ -39,18 +44,20 @@
       MenuNavBar,
       MenuTab,
       Scroll,
-      MenuBanner,
+      MenuSwiper,
       MenuItem,
-      AddCart
+      AddCart,
+      ShopCart
     },
     created() {
-
     },
     data() {
       return {
         currentIndex: 0,
+        // 展示添加购物车状态
+        showAddCart: false,
         // 展示购物车状态
-        showAddCart: false
+        showCart: false
       }
     },
     methods: {
@@ -83,6 +90,9 @@
       // 添加购物车成功事件
       addClick() {
         this.showAddCart = false
+        // 添加购物车后展示购物车状态
+        this.showCart = true
+
       }
     }
   }
