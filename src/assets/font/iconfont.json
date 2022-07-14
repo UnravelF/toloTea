@@ -6,6 +6,20 @@
   "description": "vue",
   "glyphs": [
     {
+      "icon_id": "1727357",
+      "name": "21优惠劵",
+      "font_class": "youhuijuan",
+      "unicode": "e899",
+      "unicode_decimal": 59545
+    },
+    {
+      "icon_id": "6265090",
+      "name": "积分-实色",
+      "font_class": "bonus-s",
+      "unicode": "e649",
+      "unicode_decimal": 58953
+    },
+    {
       "icon_id": "577402",
       "name": "向右1",
       "font_class": "xiangyou1",

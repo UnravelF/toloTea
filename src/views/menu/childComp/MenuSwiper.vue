@@ -21,10 +21,10 @@
       return {
         // 图片资源
         imgs: [
-          {pic: require('../../../assets/img/home/swiper/swiper1.jpg')},
           {pic: require('../../../assets/img/home/swiper/swiper2.jpg')},
           {pic: require('../../../assets/img/home/swiper/swiper3.jpg')},
           {pic: require('../../../assets/img/home/swiper/swiper4.jpg')},
+          {pic: require('../../../assets/img/home/swiper/swiper1.jpg')},
           {pic: require('../../../assets/img/home/swiper/swiper5.jpg')}
         ]
       }

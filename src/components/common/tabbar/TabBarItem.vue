@@ -16,7 +16,7 @@
       },
       activeColor: {
         type: String,
-        default: '#d81e06'
+        default: '#f97070'
       }
     },
     methods: {

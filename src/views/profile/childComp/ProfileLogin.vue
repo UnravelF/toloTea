@@ -1,5 +1,5 @@
 <template>
-  <div class="home-login">
+  <div class="profile-login">
     <div class="login-container">
       <!-- 用户头像 -->
       <div class="login-img">
@@ -9,12 +9,12 @@
       </div>
       <!-- 用户信息 -->
       <div class="login-message">
-        <div class="login-username">ailbb会员</div>
-        <div class="login-text">成为会员可享【限时优惠】等8项权益</div>
+        <div class="login-username">F-</div>
+        <div class="login-text">再获得45个新鲜度可升级为LV4</div>
       </div>
       <!-- 授权登录 -->
       <div class="login-empower">
-        <span>授权登录</span>
+        <span>TOLO会员</span>
       </div>
     </div>
   </div>
@@ -22,16 +22,16 @@
 
 <script>
   export default {
-    name: "HomeLogin"
+    name: "ProfileLogin"
   }
 </script>
 
 <style scoped>
-  .home-login {
+  .profile-login {
     position: relative;
     top: -20px;
     z-index: 99;
-    margin: 0 20px;
+    margin: 0 10px;
     border-radius: 15px;
     background-color: #fff;
     box-shadow: 0 0 10px #eee;
