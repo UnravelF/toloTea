@@ -1,6 +1,8 @@
 <template>
   <nav-bar>
-    <div slot="left" class="left">Tolo茶</div>
+    <div slot="left" class="left">
+      <img src="~assets/img/common/logo.jpg" alt="">
+    </div>
     <div slot="center" class="center">（韩山师范学院）</div>
     <div slot="right">
       <span>自提</span>
@@ -26,7 +28,12 @@
     text-align: center;
     color: #000;
   }
-
+  .left img {
+    width: 30px;
+    height: 30px;
+    vertical-align: middle;
+    border-radius: 5px;
+  }
   .right span {
     height: 20px;
     padding: 5px 12px;

@@ -6,7 +6,7 @@
           :key="index"
           :class="{active: index === currentIndex}"
           @click="itemClick(index)">
-          <div><img src="~assets/img/menu/menu-icon.png" alt=""></div>
+          <div><img :src="item.img" alt=""></div>
           <div class="tab-text">{{item.title}}</div>
       </div>
     </div>
@@ -26,22 +26,39 @@
         currentIndex: 0,
         categories: [
           {
+            img: require('../../../assets/img/menu/menutab/tuijian.svg'),
             title: "店长推荐"
-          },{
+          },
+          {
+            img: require('../../../assets/img/menu/menutab/bihe.svg'),
             title: "必喝热销榜"
-          },{
+          },
+          {
+            img: require('../../../assets/img/menu/menutab/shuiguo.svg'),
             title: "超嗲水果茶"
-          },{
+          },
+          {
+            img: require('../../../assets/img/menu/menutab/lizi.svg'),
             title: "超顶刺梨"
-          },{
+          },
+          {
+            img: require('../../../assets/img/menu/menutab/ningmeng.svg'),
             title: "超爽鲜柠"
-          },{
+          },
+          {
+            img: require('../../../assets/img/menu/menutab/youliao.svg'),
             title: "超有料家族"
-          },{
+          },
+          {
+            img: require('../../../assets/img/menu/menutab/naicha.svg'),
             title: "超赞奶茶"
-          },{
+          },
+          {
+            img: require('../../../assets/img/menu/menutab/kafei.svg'),
             title: "甄选咖啡"
-          },{
+          },
+          {
+            img: require('../../../assets/img/menu/menutab/chuncha.svg'),
             title: "原叶纯茶"
           },
         ]
