@@ -1,22 +1,33 @@
 <template>
   <div class="home-footer">
     <div class="footer-container">
-      <div class="wrap-flex-item">
-        <img src="~assets/img/home/banner-1.jpg" alt="">
-      </div>
-      <div class="wrap-flex-item">
-        <img src="~assets/img/home/banner-2.jpg" alt="">
-      </div>
-      <div class="wrap-flex-item">
-        <img src="~assets/img/home/banner-3.jpg" alt="">
+      <div class="wrap-flex-item" v-for="(item, index) in img" :key="index">
+        <img :src="item.pic" alt="">
       </div>
     </div>
   </div>
 </template>
 
 <script>
+import {getHomeFooter} from 'network/home'
+
 export default {
-  name: "HomeFooter"
+  name: "HomeFooter",
+  data() {
+    return {
+      img:[]
+    }
+  },
+  created() {
+    this.getFooter()
+  },
+  methods: {
+    getFooter() {
+      getHomeFooter().then(res => {
+        this.img = res.data
+      })
+    }
+  }
 }
 </script>
 

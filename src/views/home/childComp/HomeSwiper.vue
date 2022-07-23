@@ -14,6 +14,8 @@
   import Swiper from 'swiper';
   import 'swiper/dist/css/swiper.min.css';
 
+  import {getHomeBanner} from 'network/home'
+
   export default {
     name: "HomeSwiper",
     data() {
@@ -21,28 +23,38 @@
         // 是否显示背景颜色
         handleActive: false,
         // 图片资源
-        imgs: [
-          {pic: require('../../../assets/img/home/swiper/swiper2.jpg')},
-          {pic: require('../../../assets/img/home/swiper/swiper1.jpg')},
-          {pic: require('../../../assets/img/home/swiper/swiper3.jpg')},
-          {pic: require('../../../assets/img/home/swiper/swiper4.jpg')},
-          {pic: require('../../../assets/img/home/swiper/swiper5.jpg')}
-        ]
+        imgs: []
       }
     },
+    created() {
+      this.getBanner()
+    },
     mounted() {
-      new Swiper ('.swiper-container', {
-        autoplay: {
-          delay: 2000,
-          disableOnInteraction: false
-        },
-        loop: true
-      });
       window.addEventListener('scroll', this.handleScroll)
     },
     methods: {
       handleScroll() {
         window.pageYOffset>window.innerWidth*80/360 ? this.headerActive = true : this.headerActive = false
+      },
+      // 获取轮播图数据
+      getBanner() {
+        getHomeBanner().then(res => {
+          this.imgs = res.data
+        })
+      }
+    },
+    watch: {
+      // 在mounted里面调用swiper时，在动态获取轮播图数据前，已经实例化完成，所以需要通过watch监听，$nextTick在页面渲染完成后再进行调用
+      imgs() {
+        this.$nextTick(() => {
+          new Swiper ('.swiper-container', {
+            autoplay: {
+            delay: 2000,
+            disableOnInteraction: false
+          },
+            loop: true
+          });
+        })
       }
     }
   }

@@ -9,6 +9,7 @@
   "dependencies": {
     "axios": "^0.18.0",
     "better-scroll": "^1.15.2",
+    "mockjs": "^1.1.0",
     "swiper": "^4.5.0",
     "vue": "^2.5.17",
     "vue-lazyload": "^1.2.6",

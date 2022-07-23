@@ -2,6 +2,7 @@ import Vue from 'vue'
 import App from './App.vue'
 import router from './router'
 import 'assets/font/iconfont.css'
+import './mock/index'
 
 Vue.config.productionTip = false
 
