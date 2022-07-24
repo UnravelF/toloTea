@@ -18,11 +18,11 @@
       </scroll>
       <!-- 添加购物车弹框 -->
       <template v-if="showAddCart">
-        <add-cart @cancelClick="cancelClick" @addClick="addClick"/>
+        <add-cart @cancelClick="cancelClick" @addClick="addClick" :tid="tid" />
       </template>
       <!-- 购物车模块 -->
       <template v-if="showCart">
-        <shop-cart/>
+        <shop-cart :tid="tid" :added="added" />
       </template>
     </div>
   </div>
@@ -57,7 +57,11 @@
         // 展示添加购物车状态
         showAddCart: false,
         // 展示购物车状态
-        showCart: false
+        showCart: false,
+        // 存储选规格对应id
+        tid: 0,
+        // 存储是否添加购物车值  节流阀控制
+        added: false
       }
     },
     methods: {
@@ -80,7 +84,10 @@
         }
       },
       // 点击添加购物车事件
-      addCart() {
+      addCart(index) {
+        // 每次点击选规格时设置为false
+        this.added = false
+        this.tid = index
         this.showAddCart = true
       },
       // 点击取消添加购物车事件
@@ -92,7 +99,8 @@
         this.showAddCart = false
         // 添加购物车后展示购物车状态
         this.showCart = true
-
+        // 将是否添加购物车设置true
+        this.added = true
       }
     }
   }

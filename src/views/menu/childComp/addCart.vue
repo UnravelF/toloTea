@@ -3,12 +3,12 @@
     <div class="cart-content">
       <!-- 图片 -->
       <div class="content-img">
-        <img src="~assets/img/menu/item/tui1.jpg" alt="">
+        <img :src="item.pic" alt="">
       </div>
       <!-- 描述 -->
       <div class="content-text">
-        <h4>嫩仙草牛乳冰</h4>
-        <p>配料：现熬仙草冻×清凉糖浆×葡萄干×珍珠×红豆×花生碎</p>
+        <h4>{{item.itemTitle}}</h4>
+        <p>{{item.itemMessage}}</p>
       </div>
       <!-- 加料选择区 -->
       <scroll id="scroll-content"
@@ -42,8 +42,8 @@
       
       <!-- 价格以及添加购物车 -->
       <div class="add">
-        <span><i>￥</i>13</span>
-        <div class="add-cart" @click="addCart">
+        <span><i>￥</i>{{item.price}}</span>
+        <div class="add-cart" @click="addCart(item.tid)">
           加入购物车
         </div>
       </div>
@@ -55,14 +55,24 @@
 
 <script>
   import Scroll from 'components/common/scroll/Scroll'
+  
+  import {getMenuItemById} from 'network/menu'
 
   export default {
     name: "addCart",
     components: {
       Scroll
     },
+    props: {
+      tid: {
+        type: Number,
+        default: 0
+      }
+    },
     data() {
       return {
+        // 对应id商品数据
+        item: {},
         // 加料
         Feeding: '',
         // 规格
@@ -73,17 +83,25 @@
         temperature: ''
       }
     },
+    created() {
+      this.getItemById(this.tid)
+    },
     methods: {
       cancelClick() {
         this.$emit('cancelClick')
       },
-      addCart() {
-        console.log(this.Feeding);
-        console.log(this.Specifications);
-        console.log(this.Sweetness);
-        console.log(this.temperature);
-        this.$emit('addClick')
+      addCart(index) {
+        this.$emit('addClick', index)
+      },
+      // 根据id获取商品数据
+      getItemById(id) {
+        getMenuItemById(id).then(res => {
+          this.item = res.data
+        })
       }
+    },
+    watch: {
+
     }
   }
 </script>

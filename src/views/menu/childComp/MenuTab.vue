@@ -16,6 +16,8 @@
 <script>
   import Scroll from 'components/common/scroll/Scroll'
 
+  import { getTabData } from 'network/menu'
+
   export default {
     name: "MenuTab",
     components: {
@@ -24,50 +26,24 @@
     data() {
       return {
         currentIndex: 0,
-        categories: [
-          {
-            img: require('../../../assets/img/menu/menutab/tuijian.svg'),
-            title: "店长推荐"
-          },
-          {
-            img: require('../../../assets/img/menu/menutab/bihe.svg'),
-            title: "必喝热销榜"
-          },
-          {
-            img: require('../../../assets/img/menu/menutab/shuiguo.svg'),
-            title: "超嗲水果茶"
-          },
-          {
-            img: require('../../../assets/img/menu/menutab/lizi.svg'),
-            title: "超顶刺梨"
-          },
-          {
-            img: require('../../../assets/img/menu/menutab/ningmeng.svg'),
-            title: "超爽鲜柠"
-          },
-          {
-            img: require('../../../assets/img/menu/menutab/youliao.svg'),
-            title: "超有料家族"
-          },
-          {
-            img: require('../../../assets/img/menu/menutab/naicha.svg'),
-            title: "超赞奶茶"
-          },
-          {
-            img: require('../../../assets/img/menu/menutab/kafei.svg'),
-            title: "甄选咖啡"
-          },
-          {
-            img: require('../../../assets/img/menu/menutab/chuncha.svg'),
-            title: "原叶纯茶"
-          },
-        ]
+        // tab栏分类数据
+        categories: []
       }
     },
+    created() {
+      this.getTab()
+    },
     methods: {
+      // 导航栏点击事件
       itemClick(index) {
         this.currentIndex = index
         this.$emit('MenuClick', index)
+      },
+      // 获取tab栏数据
+      getTab() {
+        getTabData().then(res => {
+          this.categories = res.data
+        })
       }
     }
   }

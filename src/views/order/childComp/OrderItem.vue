@@ -33,6 +33,9 @@
 
 <script>
   import Scroll from 'components/common/scroll/Scroll'
+  
+  import { mapGetters } from 'vuex'
+
   export default {
     name: "OrderItem",
     props: {
@@ -43,6 +46,9 @@
     },
     components: {
       Scroll,
+    },
+    computed: {
+      ...mapGetters(['getotalTid'])
     },
     data() {
       return {
@@ -134,10 +140,15 @@
     },
     created() {
       this.getOrderStatus()
+      // 监听每次订单传递
+      this.getTeaItem()
     },
     methods: {
       toMenu() {
         this.$router.push({path: '/menu'})
+      },
+      getTeaItem() {
+        console.log(this.getotalTid);
       },
       // 判断点击的订单状态栏
       getOrderStatus() {
@@ -157,7 +168,7 @@
       // 再喝一杯点击事件
       getMore() {
         this.$router.push({path: '/menu'})
-      }
+      },
     },
     // 监听点击的订单状态变化
     watch: {
@@ -165,7 +176,7 @@
         this.orderstauts = newValue
         // 重新渲染页面
         this.getOrderStatus()
-      }
+      },
     }
   }
 </script>

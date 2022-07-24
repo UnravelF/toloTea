@@ -6,19 +6,74 @@
     </div>
     <!-- price模块 -->
     <div class="price">
-      <i>￥</i><span>11</span>
+      <i>￥</i><span>{{totalPrice}}</span>
     </div>
     <!-- settle模块 -->
-    <div class="settle">
+    <div class="settle" @click="toSettle">
       去结算
     </div>
   </div>
 </template>
 
 <script>
-export default {
-  name: "ShopCart"
-}
+  import {getMenuItemById} from 'network/menu'
+
+  import { mapMutations } from 'vuex'
+
+  export default {
+    name: "ShopCart",
+    props:{
+      tid: {
+        type: Number,
+        default: 0
+      },
+      added: {
+        type: Boolean,
+        default: false
+      }
+    },
+    data() {
+      return {
+        // 购物车总价格
+        totalPrice: 0,
+        // 存储此次购物车订单商品
+        Tid: []
+      }
+    },
+    created() {
+      this.getItemById(this.tid)
+    },
+    methods: {
+      ...mapMutations(['settotalTid']),
+      // 根据id获取商品数据
+      getItemById(id) {
+        getMenuItemById(id).then(res => {
+          console.log(res);
+          this.totalPrice += parseInt(res.data.price)
+          this.Tid.push(id)
+        })
+      },
+      // 去结算点击事件
+      toSettle() {
+        //将订单对应茶品id存储到store中
+        this.settotalTid(this.Tid)
+      }
+    },
+    // 监听不同商品添加购物车时购物车总价格变化
+    watch: {
+      tid(newValue, oldValue) {
+        this.$nextTick(() => {
+          this.tid = newValue
+        })
+      },
+      // 监听父组件传递的节流阀变化  控制添加购物车总价
+      added(newValue, oldValue) {
+        if(newValue === true) {
+          this.getItemById(this.tid)
+        }
+      }
+    }
+  }
 </script>
 
 <style scoped>
