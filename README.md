@@ -1,12 +1,5 @@
 <h2 align="center">Tolo奶茶</h2>
 
-<div align="center">
-
-  	<a href="https://github.com/vuejs/vue">
-    		<img src="https://img.shields.io/badge/vue-2.5.2-blue.svg" alt="vue">
- 	 </a>
-</div>
-
 Tolo奶茶是一个前端移动端的奶茶点餐系统，基于vue2与mockjs开发的移动端项目。基于mockjs产生模拟数据，编写后台模拟接口，通过拦截前端的网络请求传递模拟数据进行渲染页面，已经实现奶茶点餐系统的相关功能，内含多类功能化组件的封装运用。
 
 ### 功能简介
