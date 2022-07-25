@@ -224,6 +224,114 @@ const teaItem = [
         price: '16'
       }
     ]
+  },
+  {
+    refName: 'item6',
+    title: '超有料家族',
+    itemData: [
+      {
+        tid: 10,
+        pic: require('../assets/img/menu/item/xianning1.jpg'),
+        itemTitle: '鸭香柠檬茶',
+        itemMessage: '柠檬×鸭屎香茶',
+        price: '14'
+      },
+      {
+        tid: 11,
+        pic: require('../assets/img/menu/item/xianning2.jpg'),
+        itemTitle: '鲜柠加油柑',
+        itemMessage: '柠檬×油柑汁×毛峰茉莉绿茶',
+        price: '15'
+      },
+      {
+        tid: 12,
+        pic: require('../assets/img/menu/item/xianning3.jpg'),
+        itemTitle: '鲜柠生打椰',
+        itemMessage: '生椰乳×新鲜柠檬',
+        price: '16'
+      }
+    ]
+  },
+  {
+    refName: 'item7',
+    title: '超赞奶茶',
+    itemData: [
+      {
+        tid: 10,
+        pic: require('../assets/img/menu/item/xianning1.jpg'),
+        itemTitle: '鸭香柠檬茶',
+        itemMessage: '柠檬×鸭屎香茶',
+        price: '14'
+      },
+      {
+        tid: 11,
+        pic: require('../assets/img/menu/item/xianning2.jpg'),
+        itemTitle: '鲜柠加油柑',
+        itemMessage: '柠檬×油柑汁×毛峰茉莉绿茶',
+        price: '15'
+      },
+      {
+        tid: 12,
+        pic: require('../assets/img/menu/item/xianning3.jpg'),
+        itemTitle: '鲜柠生打椰',
+        itemMessage: '生椰乳×新鲜柠檬',
+        price: '16'
+      }
+    ]
+  },
+  {
+    refName: 'item8',
+    title: '甄选咖啡',
+    itemData: [
+      {
+        tid: 10,
+        pic: require('../assets/img/menu/item/xianning1.jpg'),
+        itemTitle: '鸭香柠檬茶',
+        itemMessage: '柠檬×鸭屎香茶',
+        price: '14'
+      },
+      {
+        tid: 11,
+        pic: require('../assets/img/menu/item/xianning2.jpg'),
+        itemTitle: '鲜柠加油柑',
+        itemMessage: '柠檬×油柑汁×毛峰茉莉绿茶',
+        price: '15'
+      },
+      {
+        tid: 12,
+        pic: require('../assets/img/menu/item/xianning3.jpg'),
+        itemTitle: '鲜柠生打椰',
+        itemMessage: '生椰乳×新鲜柠檬',
+        price: '16'
+      }
+    ]
+  },
+  {
+    refName: 'item9',
+    title: '原叶纯茶',
+    itemData: [
+      {
+        tid: 10,
+        pic: require('../assets/img/menu/item/xianning1.jpg'),
+        itemTitle: '鸭香柠檬茶',
+        itemMessage: '柠檬×鸭屎香茶',
+        price: '14'
+      },
+      {
+        tid: 11,
+        pic: require('../assets/img/menu/item/xianning2.jpg'),
+        itemTitle: '鲜柠加油柑',
+        itemMessage: '柠檬×油柑汁×毛峰茉莉绿茶',
+        price: '15'
+      },
+      {
+        tid: 12,
+        pic: require('../assets/img/menu/item/xianning3.jpg'),
+        itemTitle: '鲜柠生打椰',
+        itemMessage: '生椰乳×新鲜柠檬',
+        price: '16'
+      }
+    ]
   }
 ]
 

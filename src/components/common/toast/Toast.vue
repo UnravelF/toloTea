@@ -14,8 +14,8 @@
       }
     },
     methods: {
-      // 默认展示时间2000
-      show(message, duration=2000) {
+      // 默认展示时间1000
+      show(message, duration=1000) {
         this.isShow = true
         this.message = message
 

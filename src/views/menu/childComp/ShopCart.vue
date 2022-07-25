@@ -56,6 +56,10 @@
       toSettle() {
         //将订单对应茶品id存储到store中
         this.settotalTid(this.Tid)
+        // 结算跳转到订单页
+        this.$nextTick(() => {
+          this.$router.push({path: '/order'})
+        })
       }
     },
     // 监听不同商品添加购物车时购物车总价格变化
