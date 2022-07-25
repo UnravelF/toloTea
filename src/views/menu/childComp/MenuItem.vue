@@ -66,7 +66,6 @@
       // 获取item数据
       getItem() {
         getMenuItem().then(res => {
-          console.log(res);
           this.Data = res.data
         })
       }

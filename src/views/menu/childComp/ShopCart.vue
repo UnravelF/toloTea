@@ -48,7 +48,6 @@
       // 根据id获取商品数据
       getItemById(id) {
         getMenuItemById(id).then(res => {
-          console.log(res);
           this.totalPrice += parseInt(res.data.price)
           this.Tid.push(id)
         })

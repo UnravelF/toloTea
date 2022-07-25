@@ -17,7 +17,7 @@ export function getMenuItem() {
 // 根据id获取选择规格商品
 export function getMenuItemById(id) {
   return request({
-    url: '/menu/menu/item/',
+    url: '/menu/item/',
     params: {
       id
     }

@@ -1,5 +1,7 @@
 import Mock from 'mockjs'
 
+import { formatDate } from '../common/utils'
+
 
 // 根据url获取query参数
 const getQuery = (url, name) => {
@@ -31,7 +33,7 @@ var imgs = [
 Mock.mock('/home/banner', 'get', () => {
   return {
     status: 200,
-    message: '获取轮播图数据成功',
+    message: 'success',
     data: imgs,
     total: imgs.length
   }
@@ -48,7 +50,7 @@ var footerImgs = [
 Mock.mock('/home/footer', 'get', () => {
   return {
     status: 200,
-    message: '获取底部图标数据成功',
+    message: 'success',
     data: footerImgs,
     total: footerImgs.length
   }
@@ -101,7 +103,7 @@ const categories = [
 Mock.mock('/menu/menutab', 'get', () => {
   return {
     status: 200,
-    message: '获取tab栏数据成功',
+    message: 'success',
     data: categories,
     total: categories.length
   }
@@ -229,7 +231,7 @@ const teaItem = [
 Mock.mock('/menu/menuitem', 'get', () => {
   return {
     status: 200,
-    message: '获取茶品数据成功',
+    message: 'success',
     data: teaItem,
     total: teaItem.length
   }
@@ -242,89 +244,89 @@ const itemData = [
     pic: require('../assets/img/menu/item/tui1.jpg'),
     itemTitle: '嫩仙草牛乳冰',
     itemMessage: '配料：现熬仙草冻×清凉糖浆×葡萄干×珍珠×红豆×花生碎',
-    price: '13'
+    price: 13
   },
   {
     tid: 2,
     pic: require('../assets/img/menu/item/bi1.jpg'),
     itemTitle: '百香果金菠萝',
     itemMessage: '金菠萝×柠檬×百香果×毛峰茉莉绿茶',
-    price: '13'
+    price: 13
   },
   {
     tid: 3,
     pic: require('../assets/img/menu/item/bi2.jpg'),
     itemTitle: '厚芋泥啵啵奶茶',
     itemMessage: '荔浦芋泥×波波×奶茶 每日现煮荔浦芋泥滑入丝滑奶茶中',
-    price: '13'
+    price: 13
   },
   {
     tid: 4,
     pic: require('../assets/img/menu/item/bi3.jpg'),
     itemTitle: '杨枝甘露清爽板',
     itemMessage: '芒果×西柚粒×小多肉×大多肉×椰奶',
-    price: '17'
+    price: 17
   },
   {
     tid: 5,
     pic: require('../assets/img/menu/item/chao1.jpg'),
     itemTitle: '爆柠草莓金菠萝',
     itemMessage: '金菠萝×草莓×柠檬×绿茶 人气网红番茄蛋花汤',
-    price: '18'
+    price: 18
   },
   {
     tid: 6,
     pic: require('../assets/img/menu/item/chao2.jpg'),
     itemTitle: '西瓜冻冻',
     itemMessage: '西瓜×冻冻×绿茶',
-    price: '12'
+    price: 12
   },
   {
     tid: 7,
     pic: require('../assets/img/menu/item/chao3.jpg'),
     itemTitle: '超赞西瓜桶',
     itemMessage: '当季西瓜×毛峰茉莉',
-    price: '16'
+    price: 16
   },
   {
     tid: 8,
     pic: require('../assets/img/menu/item/cili1.jpg'),
     itemTitle: '刺梨鸭屎香',
     itemMessage: '鲜榨刺梨汁×鸭屎香鲜茶×当季柠檬',
-    price: '18'
+    price: 18
   },
   {
     tid: 9,
     pic: require('../assets/img/menu/item/cili2.jpg'),
     itemTitle: '刺梨维C皇(袋装)',
     itemMessage: '双倍鲜榨刺梨汁×当季柠檬×爽口冻冻',
-    price: '17'
+    price: 17
   },
   {
     tid: 10,
     pic: require('../assets/img/menu/item/xianning1.jpg'),
     itemTitle: '鸭香柠檬茶',
     itemMessage: '柠檬×鸭屎香茶',
-    price: '14'
+    price: 14
   },
   {
     tid: 11,
     pic: require('../assets/img/menu/item/xianning2.jpg'),
     itemTitle: '鲜柠加油柑',
     itemMessage: '柠檬×油柑汁×毛峰茉莉绿茶',
-    price: '15'
+    price: 15
   },
   {
     tid: 12,
     pic: require('../assets/img/menu/item/xianning3.jpg'),
     itemTitle: '鲜柠生打椰',
     itemMessage: '生椰乳×新鲜柠檬',
-    price: '16'
+    price: 16
   }
 ]
 
 // 点击选规格获取数据
-Mock.mock(/\/menu\/menu\/item/, 'get', (options) => {
+Mock.mock(/\/menu\/item/, 'get', (options) => {
   // 从地址中截取tid
   const tid = parseInt(getQuery(options.url, 'id'))
   // 从茶品数据中查找对应id的商品
@@ -334,9 +336,206 @@ Mock.mock(/\/menu\/menu\/item/, 'get', (options) => {
 
   return {
     status: 200,
-    message: '查询商品成功',
+    message: 'success',
     data: item
   }
 })
 
 // 3. 订单模拟数据
+// 当前订单数据
+Mock.mock('/order/nowitem', 'post', (options) => {
+  // json字符串转换成json数据
+  const body = JSON.parse(options.body)
+  // 获取传递的茶品id
+  const itemsTid = body.arr
+
+  // 存储id对应的当前订单数据
+  var Teaitems = [
+    {
+      location: 'Tolo茶(韩山师范学院店)',
+      status: '制作中',
+      timer: null,
+      items: [],
+      totalPrice: 0
+    }
+  ]
+
+  // 根据传递的id数组查询模拟数据中的对应茶品
+  for(var i = 0; i<itemsTid.length; i++) {
+    Teaitems[0].items.push(itemData.find(item => {
+      return item.tid === itemsTid[i]
+    }))
+  }
+
+  // 计算总价格
+  Teaitems[0].items.forEach(item => {
+    Teaitems[0].totalPrice += item.price
+  })
+  // 生成订单时间
+  const date = new Date()
+  Teaitems[0].timer = formatDate(date, 'yyyy-MM-dd hh:mm:ss')
+
+  return {
+    status: 200,
+    message: 'success',
+    data: Teaitems
+  }
+})
+
+// 模拟历史订单数据
+const prevDate = [
+  {
+    location: 'Tolo茶(韩山师范学院店)',
+    status: '已完成',
+    timer: '2022-07-12 21:29:30',
+    items: [
+      {
+        tid: 1,
+        pic: require('../assets/img/menu/item/tui1.jpg'),
+        itemTitle: '嫩仙草牛乳冰',
+        itemMessage: '配料：现熬仙草冻×清凉糖浆×葡萄干×珍珠×红豆×花生碎',
+        price: 13
+      },
+      {
+        tid: 12,
+        pic: require('../assets/img/menu/item/xianning3.jpg'),
+        itemTitle: '鲜柠生打椰',
+        itemMessage: '生椰乳×新鲜柠檬',
+        price: 16
+      },
+      {
+        tid: 5,
+        pic: require('../assets/img/menu/item/chao1.jpg'),
+        itemTitle: '爆柠草莓金菠萝',
+        itemMessage: '金菠萝×草莓×柠檬×绿茶 人气网红番茄蛋花汤',
+        price: 18
+      }
+    ],
+    totalPrice: '32',
+  },
+  {
+    location: 'Tolo茶(韩山师范学院店)',
+    status: '已完成',
+    timer: '2022-07-12 21:29:30',
+    items: [
+      {
+        tid: 3,
+        pic: require('../assets/img/menu/item/bi2.jpg'),
+        itemTitle: '厚芋泥啵啵奶茶',
+        itemMessage: '荔浦芋泥×波波×奶茶 每日现煮荔浦芋泥滑入丝滑奶茶中',
+        price: 13
+      },
+      {
+        tid: 7,
+        pic: require('../assets/img/menu/item/chao3.jpg'),
+        itemTitle: '超赞西瓜桶',
+        itemMessage: '当季西瓜×毛峰茉莉',
+        price: 16
+      },
+      {
+        tid: 12,
+        pic: require('../assets/img/menu/item/xianning3.jpg'),
+        itemTitle: '鲜柠生打椰',
+        itemMessage: '生椰乳×新鲜柠檬',
+        price: 16
+      }
+    ],
+    totalPrice: '32',
+  },
+  {
+    location: 'Tolo茶(韩山师范学院店)',
+    status: '已完成',
+    timer: '2022-07-12 21:29:30',
+    items: [
+      {
+        tid: 1,
+        pic: require('../assets/img/menu/item/tui1.jpg'),
+        itemTitle: '嫩仙草牛乳冰',
+        itemMessage: '配料：现熬仙草冻×清凉糖浆×葡萄干×珍珠×红豆×花生碎',
+        price: 13
+      },
+      {
+        tid: 12,
+        pic: require('../assets/img/menu/item/xianning3.jpg'),
+        itemTitle: '鲜柠生打椰',
+        itemMessage: '生椰乳×新鲜柠檬',
+        price: 16
+      },
+      {
+        tid: 5,
+        pic: require('../assets/img/menu/item/chao1.jpg'),
+        itemTitle: '爆柠草莓金菠萝',
+        itemMessage: '金菠萝×草莓×柠檬×绿茶 人气网红番茄蛋花汤',
+        price: 18
+      }
+    ],
+    totalPrice: '32',
+  },
+  {
+    location: 'Tolo茶(韩山师范学院店)',
+    status: '已完成',
+    timer: '2022-07-12 21:29:30',
+    items: [
+      {
+        tid: 1,
+        pic: require('../assets/img/menu/item/tui1.jpg'),
+        itemTitle: '嫩仙草牛乳冰',
+        itemMessage: '配料：现熬仙草冻×清凉糖浆×葡萄干×珍珠×红豆×花生碎',
+        price: 13
+      },
+      {
+        tid: 12,
+        pic: require('../assets/img/menu/item/xianning3.jpg'),
+        itemTitle: '鲜柠生打椰',
+        itemMessage: '生椰乳×新鲜柠檬',
+        price: 16
+      },
+      {
+        tid: 5,
+        pic: require('../assets/img/menu/item/chao1.jpg'),
+        itemTitle: '爆柠草莓金菠萝',
+        itemMessage: '金菠萝×草莓×柠檬×绿茶 人气网红番茄蛋花汤',
+        price: 18
+      }
+    ],
+    totalPrice: '32',
+  },
+  {
+    location: 'Tolo茶(韩山师范学院店)',
+    status: '已完成',
+    timer: '2022-07-12 21:29:30',
+    items: [
+      {
+        tid: 1,
+        pic: require('../assets/img/menu/item/tui1.jpg'),
+        itemTitle: '嫩仙草牛乳冰',
+        itemMessage: '配料：现熬仙草冻×清凉糖浆×葡萄干×珍珠×红豆×花生碎',
+        price: 13
+      },
+      {
+        tid: 12,
+        pic: require('../assets/img/menu/item/xianning3.jpg'),
+        itemTitle: '鲜柠生打椰',
+        itemMessage: '生椰乳×新鲜柠檬',
+        price: 16
+      },
+      {
+        tid: 5,
+        pic: require('../assets/img/menu/item/chao1.jpg'),
+        itemTitle: '爆柠草莓金菠萝',
+        itemMessage: '金菠萝×草莓×柠檬×绿茶 人气网红番茄蛋花汤',
+        price: 18
+      }
+    ],
+    totalPrice: '32',
+  },
+]
+
+// 获取历史订单数据
+Mock.mock('/order/previtem', 'get', () => {
+  return {
+    status: 200,
+    message: 'success',
+    data: prevDate
+  }
+})

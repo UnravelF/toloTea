@@ -92,6 +92,7 @@
       },
       addCart(index) {
         this.$emit('addClick', index)
+        this.$toast.show('加入购物车成功')
       },
       // 根据id获取商品数据
       getItemById(id) {

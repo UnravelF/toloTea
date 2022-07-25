@@ -16,11 +16,11 @@
           <h4>{{item.location}} <i class="iconfont icon-searchxiangyou1"></i></h4>
           <span class="Completed">{{item.status}}</span>
           <div class="item-message">
-            <div v-for="it in item.img">
+            <div v-for="it in item.items">
               <img :src="it.pic" alt="">
             </div>
             <span>
-              <p>￥{{item.prcie}}</p><i>共{{item.img.length}}件</i>
+              <p>￥{{item.totalPrice}}</p><i>共{{item.items.length}}件</i>
             </span>
           </div>
           <p>{{item.timer}}</p>
@@ -34,7 +34,9 @@
 <script>
   import Scroll from 'components/common/scroll/Scroll'
   
-  import { mapGetters } from 'vuex'
+  import { mapGetters, mapMutations } from 'vuex'
+
+  import {getOrderItemByIds, getPrevItem} from 'network/order'
 
   export default {
     name: "OrderItem",
@@ -56,114 +58,61 @@
         orderCount: false,
         // 模拟订单数据
         // 当前订单模拟数据
-        currentOrder: [
-          {
-            location: 'Tolo茶(韩山师范学院店)',
-            status: '制作中',
-            prcie: '32',
-            timer: '2022-07-12 21:29:30',
-            img: [
-              {
-                pic: require('../../../assets/img/menu/item/tui1.jpg'),
-              },
-              {
-                pic: require('../../../assets/img/menu/item/bi1.jpg'),
-              },
-              {
-                pic: require('../../../assets/img/menu/item/chao1.jpg'),
-              }
-            ]
-          }
-        ],
+        currentOrder: [],
         // 历史订单模拟数据
-        historicalOrders:[
-          {
-            location: 'Tolo茶(韩山师范学院店)',
-            status: '已完成',
-            prcie: '32',
-            timer: '2022-07-12 21:29:30',
-            img: [
-              {
-                pic: require('../../../assets/img/menu/item/tui1.jpg'),
-              },
-              {
-                pic: require('../../../assets/img/menu/item/bi1.jpg'),
-              },
-              {
-                pic: require('../../../assets/img/menu/item/chao1.jpg'),
-              }
-            ]
-          },
-          {
-            location: 'Tolo茶(韩山师范学院店)',
-            status: '已取消',
-            prcie: '28',
-            timer: '2022-07-11 21:29:30',
-            img: [
-              {
-                pic: require('../../../assets/img/menu/item/chao2.jpg'),
-              },
-              {
-                pic: require('../../../assets/img/menu/item/bi2.jpg'),
-              }
-            ]
-          },
-          {
-            location: 'Tolo茶(韩山师范学院店)',
-            status: '已完成',
-            prcie: '16',
-            timer: '2022-07-10 21:29:30',
-            img: [
-              {
-                pic: require('../../../assets/img/menu/item/xianning1.jpg'),
-              }
-            ]
-          },
-          {
-            location: 'Tolo茶(韩山师范学院店)',
-            status: '已完成',
-            prcie: '32',
-            timer: '2022-07-07 21:29:30',
-            img: [
-              {
-                pic: require('../../../assets/img/menu/item/naicha3.jpg'),
-              },
-              {
-                pic: require('../../../assets/img/menu/item/naicha2.jpg'),
-              }
-            ]
-          }
-        ],
+        historicalOrders: [],
         // 根据点击的订单状态存储订单数据
         itemMessage: []
       }
     },
     created() {
+      // 获取数据
       this.getOrderStatus()
-      // 监听每次订单传递
-      this.getTeaItem()
     },
     methods: {
+      ...mapMutations(['settotalTid']),
       toMenu() {
         this.$router.push({path: '/menu'})
       },
-      getTeaItem() {
-        console.log(this.getotalTid);
-      },
       // 判断点击的订单状态栏
       getOrderStatus() {
-        // console.log(this.orderstauts);
         if(this.orderstauts === 0) {
-          this.itemMessage = this.currentOrder
-          if(this.itemMessage.length === 0) {
-            this.orderCount = true
-          }
+          // 监听每次当前订单传递
+          this.getOrder(this.getotalTid)
         } else {
-          this.itemMessage = this.historicalOrders
-          if(this.itemMessage.length === 0) {
-            this.orderCount = true
-          }
+          // 请求历史订单数据传递
+          this.getPrevOrder()
         }
+      },
+      // 获取当前订单茶品数据
+      getOrder(totalTid) {
+        getOrderItemByIds(totalTid).then(res => {
+          // 获取到有当前订单时赋值
+          this.currentOrder = res.data
+          this.itemMessage = this.currentOrder
+          
+          // 拿到当前订单后订单状态改变
+          if(this.itemMessage[0].items.length === 0) {
+            this.orderCount = true
+          }else {
+            this.orderCount = false
+          }
+        })
+      },
+      // 获取历史订单数据
+      getPrevOrder() {
+        getPrevItem().then(res => {
+          console.log(res);
+          this.historicalOrders = res.data
+          this.itemMessage = this.historicalOrders
+
+          // 拿到当前订单后订单状态改变
+          if(this.itemMessage[0].items.length === 0) {
+            this.orderCount = true
+          }else {
+            this.orderCount = false
+          }
+        })
       },
       // 再喝一杯点击事件
       getMore() {
@@ -177,6 +126,15 @@
         // 重新渲染页面
         this.getOrderStatus()
       },
+      // 监听订单传递状态
+      getotalTid: {
+        deep: true,
+        handler(newValue, oldValue) {
+          this.settotalTid(newValue)
+          // 值变化后重新渲染
+          this.getOrderStatus()
+        }
+      }
     }
   }
 </script>
@@ -243,7 +201,7 @@
     position: relative;
     height: 200px;
     background-color: #fff;
-    margin: 20px 0;
+    margin: 10px 0;
     border-radius: 10px;
     padding: 20px 10px;
   }
