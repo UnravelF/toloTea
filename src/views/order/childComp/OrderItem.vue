@@ -16,7 +16,7 @@
           <h4>{{item.location}} <i class="iconfont icon-searchxiangyou1"></i></h4>
           <span class="Completed">{{item.status}}</span>
           <div class="item-message">
-            <div v-for="it in item.items">
+            <div v-for="it in item.items" class="img-box">
               <img :src="it.pic" alt="">
             </div>
             <span>
@@ -225,11 +225,15 @@
   }
 
   .item-message {
+    position: relative;
     display: flex;
-    justify-content: space-between;
+    flex-direction: row;
     width: 100%;
     height: 70px;
     margin-bottom: 30px;
+  }
+  .item-message .img-box {
+    margin-right: 5px;
   }
   .item-message img {
     width: 100%;
@@ -237,10 +241,13 @@
     vertical-align: middle;
   }
   .item-message span{
+    position: absolute;
+    right: 5px;
     width: 20%;
-    text-align: center;
+    text-align: right;
     padding-top: 15px;
     font-size: 18px;
+    float: right;
   }
    .item-message span p {
       color: #000;
